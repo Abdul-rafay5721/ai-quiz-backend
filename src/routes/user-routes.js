@@ -29,24 +29,19 @@ const API = {
     DECODE_TOKEN: '/token',
     GET_USER: '/:id',
     UPDATE_SETTINGS: '/settings',
-    UPDATE_SURVEY: '/survey',
+    UPDATE_SURVEY: '/survey'
 };
 
-userRouter.post(
-    API.REGISTER_EMAIL_USER,
-    audit,
-    celebrate(UserValidator.registerUserByEmail),
-    // checkAuth,
-    // authorizedRoles([CONSTANT_ENUM.USER_ROLE.ADMIN, CONSTANT_ENUM.USER_ROLE.DISPATCHER]),
-    UserController.registerUserByEmail
-);
+// userRouter.post(
+//     API.REGISTER_EMAIL_USER,
+//     audit,
+//     celebrate(UserValidator.registerUserByEmail),
+//     // checkAuth,
+//     // authorizedRoles([CONSTANT_ENUM.USER_ROLE.ADMIN, CONSTANT_ENUM.USER_ROLE.DISPATCHER]),
+//     UserController.registerUserByEmail
+// );
 
-userRouter.post(
-    API.REGISTER_OAUTH_USER,
-    audit,
-    celebrate(UserValidator.registerUserByOAuth),
-    UserController.registerOAuthUser
-);
+userRouter.post(API.REGISTER_OAUTH_USER, audit, celebrate(UserValidator.registerUserByOAuth), UserController.registerOAuthUser);
 
 userRouter.post(API.CREATE_APPROVERS, audit, celebrate(UserValidator.createApprovers), checkAuth, authorizedRoles([CONSTANT_ENUM.USER_ROLE.ADMIN]), UserController.createApprovers);
 
